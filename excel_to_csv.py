@@ -3,13 +3,13 @@ import numpy as np
 import glob
 
 all_files=[]
+colums = ['CIA','FCH_PROCESO','PEDIDO','ZONA','CODCLIENTE','APELLIDOS','NOMBRE1','NOMBRE2','DIRECCION','TELEFONO','DEPART','PROV','DISTRITO' ]
 
 #Colectando todos los archivos
 for f in glob.glob('/Users/wilmontenegro/Downloads/*.xls*'):
-    df=pd.read_excel(f)
-    df.iloc[[0,1]]
+    df=pd.read_excel(f, usecols=colums)
     print(f'El total de filas del archivo {f[31::]} es:', df.shape[0])
-    all_files.append(pd.read_excel(f))
+    all_files.append(pd.read_excel(f, usecols=colums))
 
 df = pd.concat(all_files, ignore_index='True')
 print(df.head(10))
