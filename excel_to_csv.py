@@ -3,15 +3,23 @@ import numpy as np
 import glob
 
 all_files=[]
-#Listas de Campos
-columns_preliquidacion = ['Nombre Plan', 'Fecha Plan', 'Grupo de Flota',
-                          'Código del Vehículo','Descripción del Vehículo', 'Código de Dirección',
-                          'Nombre Cliente', 'Nombre dirección', 'Comuna',
-                          'Lat', 'Lng', 'Motivo', 
-                          'Hora de Entrega', 'PdE cercano a dirección', 'Distancia PdE',
-                          'PdE lat', 'PdE lng',  'Conductor',
-                          'Orden de entrega', 'Orden original', 'Tiene imágenes',
-                          'Hora inicio detención', 'Hora fin detención']
+
+# columns_preliquidacion = ['Fecha Plan','Código del Vehículo','Código de Orden','Código de Dirección','Dirección','Nombre Cliente','Comuna',
+#                            'Código Postal','Lat','Lng','Estado','Motivo','Hora de Entrega','PdE cercano a dirección',
+#                            'Distancia PdE','PdE lat','PdE lng','Conductor','Orden de entrega','Orden original','Tiene imágenes',
+#                            'Tiempo de servicio','Duración de la detención','ETA iniciado']
+
+#Listas de Campos Beetrack
+#columns_preliquidacion = ['Código de Orden','Lat','Lng','Dirección','Descripción Item','Unidades','Código de Dirección','Nombre dirección','Comuna']
+
+#Analisis Km
+columns_preliquidacion = ['Nombre Plan','Fecha Plan','Código de Orden','Grupo de Flota','Código del Vehículo','Descripción del Vehículo','Odómetro','Código de Dirección',
+                          'Nombre Cliente','Comuna','Código Postal','Lat','Lng','Estado','Motivo','Hora de Entrega','PdE cercano a dirección','Distancia PdE','PdE lat',
+                          'PdE lng','Conductor','Hora inicio ruta','Hora fin ruta','Código de ruta','Orden de entrega','Orden original','Duración de la detención']
+
+
+#Prueba de Entrega
+#columns_preliquidacion = ['Código de Orden', 'Estado', 'Motivo', 'Hora de Entrega']
 
 columns_prueba_entrega_belcorp = ['Fecha Facturación', 'Fecha Promesa Entrega', 'Fecha Entrega',
                                   'Compañía', 'Campaña', 'Zona', 
@@ -35,7 +43,7 @@ def selection_type_read():
     print('1 -> Preliquidación \n2 -> Prueba de Entrega')
     user_selection_type_read = int(input("Selecciona el tipo de archivo: "))
     print('1 -> Excel \n2 -> CSV')
-    user_selection_type_export = int(input("Selecciona en que formato quires exportar: "))
+    user_selection_type_export = int(input("Selecciona en que formato quieres exportar: "))
     
     if  user_selection_type_read == 1:
         archive_type = columns_preliquidacion
@@ -54,7 +62,7 @@ def selection_type_export():
 #Colectando todos los archivos, header para seleccionar en que fila estan los titulos
 def read():
     global df
-    for f in glob.glob('/Users/wilmontenegro/Downloads/*.xls*'):
+    for f in glob.glob('/Users/wilmontenegro/Downloads/Consolidar/*.xls*'):
         df=pd.read_excel(f, header=header_type, usecols = archive_type)
         print(f'El total de filas del archivo {f[31::]} es:', df.shape[0])
         all_files.append(pd.read_excel(f, header=header_type, usecols = archive_type))
