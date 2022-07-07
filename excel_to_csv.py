@@ -40,7 +40,7 @@ def export_csv():
 
 def selection_type_read():
     global archive_type, header_type, user_selection_type_export
-    print('1 -> Preliquidación \n2 -> Prueba de Entrega')
+    print('1 -> Preliquidación \n2 -> Prueba de Entrega \n3 -> Todas las columnas')
     user_selection_type_read = int(input("Selecciona el tipo de archivo: "))
     print('1 -> Excel \n2 -> CSV')
     user_selection_type_export = int(input("Selecciona en que formato quieres exportar: "))
@@ -51,6 +51,9 @@ def selection_type_read():
     elif user_selection_type_read == 2:
         archive_type = columns_prueba_entrega_belcorp
         header_type = 1
+    elif user_selection_type_read == 3:
+        archive_type = None
+        header_type = 0
     
 def selection_type_export():
     if user_selection_type_export == 1:
